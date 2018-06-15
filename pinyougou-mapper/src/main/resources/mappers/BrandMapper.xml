@@ -3,7 +3,33 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pinyougou.mapper.BrandMapper">
+
+    <!-- 分条件查询全部 -->
     <select id="findAll" resultType="brand">
         select * from tb_brand
+        <where>
+            <if test="brand!=null">
+                <!-- 品牌名称 -->
+                <if test="brand.name!=null and brand.name!=''">
+                    and name like concat('%',#{brand.name},'%')
+                </if>
+                <!-- 品牌首字母 -->
+                <if test="brand.firstChar!=null and brand.firstChar!=''">
+                    and first_char = #{brand.firstChar}
+                </if>
+            </if>
+        </where>
+        order by id asc
     </select>
+
+    <!-- 批量删除 -->
+    <delete id="deleteAll">
+        delete from tb_brand
+        <where>
+            id
+           <foreach collection="ids" item="id" open="in (" close=")" separator=",">
+                #{id}
+           </foreach>
+        </where>
+    </delete>
 </mapper>
