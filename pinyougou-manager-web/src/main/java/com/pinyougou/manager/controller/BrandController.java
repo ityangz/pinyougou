@@ -7,6 +7,9 @@ import com.pinyougou.sellergoods.service.BrandService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 //@Controller
 @RestController
 @RequestMapping("/brand")
@@ -16,6 +19,14 @@ public class BrandController {
     //   因为在bean配置了 <dubbo:annotation package="com.pinyougou.manager.controller"/>  所以需要加reference
     @Reference
     private BrandService brandService;
+
+    /**
+     * 查询所有的品牌
+     */
+    @GetMapping("/selectBrandList")
+    public List<Map<String,Object>> selectBrandList(){
+        return brandService.findBrandByIdAndName();
+    }
 
     /**
      * 分页查询

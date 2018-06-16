@@ -4,6 +4,7 @@ import com.pinyougou.common.pojo.PageResult;
 import com.pinyougou.pojo.Brand;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 品牌service
@@ -22,5 +23,8 @@ public interface BrandService {
 
     //批量删除品牌
     void deleteBrand(Long[] ids);
+
+    //查询所有的品牌
+    List<Map<String,Object>> findBrandByIdAndName();
 
 }

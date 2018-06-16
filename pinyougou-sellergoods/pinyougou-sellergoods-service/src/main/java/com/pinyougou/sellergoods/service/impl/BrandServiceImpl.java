@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 指定接口名返回服务名
@@ -77,6 +78,15 @@ public class BrandServiceImpl implements BrandService {
     public void deleteBrand(Long[] ids) {
         try {
             brandMapper.deleteAll(ids);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    /** 查询所有的品牌*/
+    @Override
+    public List<Map<String, Object>> findBrandByIdAndName() {
+        try {
+            return brandMapper.findAllByIdAndName();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
