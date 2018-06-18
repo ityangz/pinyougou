@@ -1,13 +1,13 @@
 package com.pinyougou.manager.controller;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.pinyougou.common.pojo.PageResult;
 import com.pinyougou.pojo.Seller;
+import com.pinyougou.sellergoods.service.SellerService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.alibaba.dubbo.config.annotation.Reference;
-import com.pinyougou.sellergoods.service.SellerService;
 
 /**
  * SellerController
@@ -44,8 +44,8 @@ public class SellerController {
 	}
 
 	/** 审核商家(修改商家的状态) */
-	@GetMapping("/upddateStatus")
-	public boolean upddateStatus(String sellerId, String status){
+	@GetMapping("/updateStatus")
+	public boolean updateStatus(String sellerId, String status){
 		try{
 			sellerService.updateStatus(sellerId, status);
 			return true;

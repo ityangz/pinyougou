@@ -24,6 +24,19 @@ app.controller('sellerController', function($scope, $controller, baseService){
             });
     };
 
+    /**修改状态*/
+    $scope.updateStatus = function(sellerId,status){
+        baseService.sendGet("/seller/updateStatus?sellerId="+ sellerId +'&status=' + status).
+        then(function (res) {
+            if(res.data){
+                /**重新加载数据*/
+                $scope.reload();
+            }else{
+                alert("操作失败!!!");
+            }
+        });
+    };
+
     /** 添加或修改 */
     $scope.saveOrUpdate = function(){
         var url = "save";
